@@ -1,0 +1,26 @@
+Predstava:
+[mozek]
+  - stroj ze ktereho se dela deploy
+  - virtual, co umi build, ma misto, a muze byt nastaven jako binarni cache (bude-li to poteba,)
+
+[ installace ]  
+- Vezmu HW (generic, pripadne predpripravenej)
+- vlozim do nej usb flash ( pripadne boot ze site) 
+    - usb flash je 
+        - sestavena na miru, dhcp na vsech ninterfaces, 
+        - pripojena k mozku (pomoci treba autossh, wireguard)
+        - ma zatim asi univerzalni ip dummy ip adresu
+        - pripadne muze dostat podle nejakeho HW identifikatoru uz dummy interface
+    - boot ze site by se dal udelat i z lokalniho niuxosu
+- nabootuje prihlasi se k [mozek]  
+- mozek udela installaci na zaklade hostname/promenne  - primo ready pro konkretni router.
+
+
+[router]
+- lighthttpd
+- ospfd
+- Wrieguard do [mozek]
+- pripravena konfigurace vsech interfaces 
+- rebuild - test udela test na treba 2 minuty, a pokud se mu nepovede pripojit pres WG do [mozek] tak udela rollback
+- zabbix agent 
+
