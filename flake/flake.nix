@@ -29,12 +29,29 @@
             pkgs.curl
           ];
         };
+
+        zabbix = { pkgs, ... }: {
+          deployment = {
+            targetHost = "10.33.72.29";
+            targetPort = 22;
+            targetUser = "deployer";
+            buildOnTarget = false;
+            tags = [ "jablonka" ];
+          };
+          nixpkgs.system = "x86_64-linux";
+          imports = [
+            disko.nixosModules.disko
+            ./configuration-zabbix.nix
+          ];
+          time.timeZone = "Europe/Prague";
+        };
+
         demo = { pkgs, ... }: {
           deployment = {
-            targetHost = "demo";
+            targetHost = "192.168.40.148";
             targetPort = 22;
             targetUser = "jablonka";
-            buildOnTarget = true;
+            buildOnTarget = false;
             tags = [ "homelab" ];
           };
           nixpkgs.system = "x86_64-linux";
